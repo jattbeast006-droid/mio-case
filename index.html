@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mio Casa | Authentic Italian Restaurant</title>
+    <!-- Google Fonts for Vintage Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables based on user requested palette */
+        :root {
+            --bg-cream: #F8F3EA;
+            --bg-white: #FFFFFF;
+            --dark: #171412;
+            --burgundy: #6B1E2B;
+            --gold: #C9A227;
+        }
+
+        /* Global Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Reusable Classes */
+        .text-center { text-align: center; }
+        .text-burgundy { color: var(--burgundy); }
+        .text-gold { color: var(--gold); }
+        .bg-white { background-color: var(--bg-white); }
+        .bg-dark { background-color: var(--dark); color: var(--bg-cream); }
+        .section-padding { padding: 5rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--burgundy);
+            color: var(--bg-cream);
+            padding: 12px 28px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid var(--burgundy);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--gold);
+            border-color: var(--gold);
+            color: var(--dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--bg-cream);
+            color: var(--bg-cream);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-cream);
+            color: var(--dark);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--dark);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--burgundy);
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--bg-cream);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(23, 20, 18, 0.7), rgba(23, 20, 18, 0.7)), url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            color: var(--bg-cream);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Featured Dishes */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: var(--bg-cream);
+            border: 1px solid #e0d8c8;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 1rem;
+            height: 45px;
+        }
+
+        .card-price {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--burgundy);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #444;
+        }
+
+        .about-img img {
+            width: 100%;
+            border: 10px solid var(--bg-white);
+            box-shadow: 0 10px 30px rgba(23, 20, 18, 0.1);
+        }
+
+        /* Menu Section */
+        .menu-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .menu-section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--burgundy);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .menu-section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--gold);
+            margin: 15px auto 0;
+        }
+
+        .menu-category {
+            margin-bottom: 4rem;
+        }
+
+        .menu-category-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.2rem;
+        }
+
+        .menu-item-details {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .menu-item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--burgundy);
+        }
+
+        .menu-item-desc {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 0.2rem;
+        }
+
+        .menu-item-price {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        /* Sub-categories for Drinks */
+        .sub-category-title {
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--burgundy);
+            margin: 1.5rem 0 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 3px solid var(--gold);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .footer-col h4 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col p {
+            color: #ccc;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 3rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .menu-item { flex-direction: column; }
+            .menu-item-price { margin-top: 0.5rem; color: var(--gold); }
+            .hero-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo brand-font">Mio Casa</a>
+        <div class="nav-links">
+            <a href="#featured">Featured</a>
+            <a href="#about">About</a>
+            <a href="#menu">Menu</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="brand-font">Mio Casa</h1>
+            <p>Authentic Flavours. Unforgettable Moments.</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn">View Menu</a>
+                <a href="#contact" class="btn btn-outline">Book a Table</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dishes -->
+    <section id="featured" class="bg-white section-padding">
+        <div class="container">
+            <h2 class="text-center text-burgundy brand-font" style="font-size: 2.5rem; margin-bottom: 1rem;">Chef's Recommendations</h2>
+            <p class="text-center" style="color: #666; max-width: 600px; margin: 0 auto;">Experience the true taste of Italy with our most beloved house specialties, crafted fresh daily.</p>
+            
+            <div class="featured-grid">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Quattro Formaggi">
+                    <div class="card-body">
+                        <h3 class="card-title brand-font">Quattro Formaggi</h3>
+                        <p class="card-desc">Fresh hand-stretched dough with a delicious blend of four cheeses.</p>
+                        <p class="card-price">£14.45</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tagliatelle">
+                    <div class="card-body">
+                        <h3 class="card-title brand-font">Tagliatelle Nduja</h3>
+                        <p class="card-desc">Fresh tagliatelle with spicy nduja sauce, sauteed mushrooms, and parsley.</p>
+                        <p class="card-price">£14.45</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wine Selection">
+                    <div class="card-body">
+                        <h3 class="card-title brand-font">House Wine</h3>
+                        <p class="card-desc">Carefully curated authentic Italian reds and whites to complement your meal.</p>
+                        <p class="card-price">From £4.95</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container about-grid">
+            <div class="about-text">
+                <h2 class="brand-font">Our Story</h2>
+                <p>Welcome to <strong>Mio Casa</strong>, an unpretentious, laid-back eatery nestled in the heart of London. We believe that great Italian food shouldn't be complicated—it should be honest, fresh, and deeply comforting.</p>
+                <p>From our artisan pizzas baked on fresh hand-stretched dough to our traditional pastas and delicate gnocchi, every staple on our menu is designed to transport you straight to Italy. Pair your meal with our selection of premium beers and imported wines, and enjoy an unforgettable dining experience.</p>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1414235077428-338988a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mio Casa Interior">
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="bg-white section-padding">
+        <div class="container menu-wrapper">
+            <h2 class="menu-section-title brand-font">Our Menu</h2>
+
+            <!-- Starters -->
+            <div class="menu-category">
+                <h3 class="menu-category-title brand-font">Starters</h3>
+                
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Bruschetta</div>
+                        <div class="menu-item-desc">Baby plum tomatoes on warm garlic brushed bread with fresh basil (v)</div>
+                    </div>
+                    <div class="menu-item-price">£6.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Garlic bread</div>
+                        <div class="menu-item-desc">Fresh pizza bread brushed with garlic butter (v)</div>
+                    </div>
+                    <div class="menu-item-price">£7.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Marinated Olives</div>
+                        <div class="menu-item-desc">Selection of green and black olives marinated in extra virgin olive oil, garlic, chilli and rosemary (v)</div>
+                    </div>
+                    <div class="menu-item-price">£4.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Pane all'Aglio e Rosmarino</div>
+                        <div class="menu-item-desc">Fresh pizza bread topped with garlic, black olives, onions and rosemary (v)</div>
+                    </div>
+                    <div class="menu-item-price">£7.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Insalata Caprese</div>
+                        <div class="menu-item-desc">Traditional fresh mozzarella, tomato, fresh basil, dressed with extra virgin olive oil (v)</div>
+                    </div>
+                    <div class="menu-item-price">£7.45 / £12.95</div>
+                </div>
+            </div>
+
+            <!-- Main Course (Vegetarian) -->
+            <div class="menu-category">
+                <h3 class="menu-category-title brand-font">Main Course — Vegetarian Options</h3>
+                
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Marinara Pizza</div>
+                        <div class="menu-item-desc">Fresh garlic, basil and oregano (NO MOZZARELLA) (v)</div>
+                    </div>
+                    <div class="menu-item-price">£10.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Margherita Pizza</div>
+                        <div class="menu-item-desc">Mozzarella, olive oil and basil (v)</div>
+                    </div>
+                    <div class="menu-item-price">£11.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Quattro Formaggi Pizza</div>
+                        <div class="menu-item-desc">Delicious blend of four cheeses (v)</div>
+                    </div>
+                    <div class="menu-item-price">£14.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Vegetarian Pizza</div>
+                        <div class="menu-item-desc">Mozzarella, selection of grilled vegetables (v)</div>
+                    </div>
+                    <div class="menu-item-price">£13.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Vegetarian Piccante Pizza</div>
+                        <div class="menu-item-desc">Mozzarella, mushrooms, peppers, red onion, green chilli, jalapeno (v)</div>
+                    </div>
+                    <div class="menu-item-price">£13.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Dell'orto Pizza</div>
+                        <div class="menu-item-desc">Mozzarella, aubergine, sweet pepper, courgette, rocket (v)</div>
+                    </div>
+                    <div class="menu-item-price">£13.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Vegetarian Calzone</div>
+                        <div class="menu-item-desc">Folded pizza filled with mozzarella, ricotta, selection of grilled vegetables, onion and garlic topped with fresh marinara (v)</div>
+                    </div>
+                    <div class="menu-item-price">£12.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Penne Arrabbiata</div>
+                        <div class="menu-item-desc">Fresh Penne, fiery tomato, onion, garlic, chilli (s) (v)</div>
+                    </div>
+                    <div class="menu-item-price">£13.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Ravioli</div>
+                        <div class="menu-item-desc">Fresh tomato and mozzarella filled ravioli, tomato, garlic, onions, herbs (v)</div>
+                    </div>
+                    <div class="menu-item-price">£13.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Tortellini</div>
+                        <div class="menu-item-desc">Fresh spinach and ricotta filled tortellini, sage butter sauce (v)</div>
+                    </div>
+                    <div class="menu-item-price">£13.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Gnocchi Pesto</div>
+                        <div class="menu-item-desc">Homemade basil pesto (v)</div>
+                    </div>
+                    <div class="menu-item-price">£13.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Gnocchi Gorgonzola</div>
+                        <div class="menu-item-desc">Mild creamy gorgonzola sauce, sun dried tomato, seasoned walnuts (v)</div>
+                    </div>
+                    <div class="menu-item-price">£13.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Gnocchi alla Sorrentina</div>
+                        <div class="menu-item-desc">Mamma's fresh basil & mozzarella (v)</div>
+                    </div>
+                    <div class="menu-item-price">£12.95</div>
+                </div>
+            </div>
+
+            <!-- Main Course (Non-Vegetarian) -->
+            <div class="menu-category">
+                <h3 class="menu-category-title brand-font">Main Course — Meat & Seafood</h3>
+                
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Napoletana Pizza</div>
+                        <div class="menu-item-desc">Mozzarella, olives, capers, anchovies, oregano, rocket</div>
+                    </div>
+                    <div class="menu-item-price">£13.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Crudo Pizza</div>
+                        <div class="menu-item-desc">Mozzarella, parma ham, fresh rocket and parmesan</div>
+                    </div>
+                    <div class="menu-item-price">£14.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Prosciutto e Funghi Pizza</div>
+                        <div class="menu-item-desc">Mozzarella, seasoned mushrooms, prosciutto ham</div>
+                    </div>
+                    <div class="menu-item-price">£13.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Piccante Pizza</div>
+                        <div class="menu-item-desc">Mozzarella, sliced salami, basil</div>
+                    </div>
+                    <div class="menu-item-price">£13.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Pollo Piccante Pizza</div>
+                        <div class="menu-item-desc">Mozzarella, spicy marinated chicken, rocket (s)</div>
+                    </div>
+                    <div class="menu-item-price">£13.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Tonno e Cipolla Pizza</div>
+                        <div class="menu-item-desc">Mozzarella, tuna, olives, onion, oregano</div>
+                    </div>
+                    <div class="menu-item-price">£14.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Calzone Classic</div>
+                        <div class="menu-item-desc">Folded pizza filled with ham, garlic, mushrooms, mozzarella and ricotta, topped with fresh marinara sauce</div>
+                    </div>
+                    <div class="menu-item-price">£12.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Tagliatelle</div>
+                        <div class="menu-item-desc">Fresh Tagliatelle, spicy nduja sauce, sauteed mushrooms, parsley (s)</div>
+                    </div>
+                    <div class="menu-item-price">£14.45</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Penne Amatriciana</div>
+                        <div class="menu-item-desc">Fresh penne, guanciale, red onions, red wine, fresh chilli, tomato (s)</div>
+                    </div>
+                    <div class="menu-item-price">£13.95</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Spaghetti Bolognese</div>
+                        <div class="menu-item-desc">Fresh spaghetti, slow cooked pork and beef bolognese</div>
+                    </div>
+                    <div class="menu-item-price">£13.95</div>
+                </div>
+            </div>
+
+            <!-- Sides -->
+            <div class="menu-category">
+                <h3 class="menu-category-title brand-font">Sides</h3>
+                
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Rocket Salad</div>
+                        <div class="menu-item-desc">Rocket, cherry tomato, parmesan, olive oil (v)</div>
+                    </div>
+                    <div class="menu-item-price">£5.75</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Insalata Mista</div>
+                        <div class="menu-item-desc">Mixed baby leaves, tomato, black olives, olive oil (v)</div>
+                    </div>
+                    <div class="menu-item-price">£6.50</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Insalata Pomodoro</div>
+                        <div class="menu-item-desc">Tomato, red onion, olive oil, basil, oregano (v)</div>
+                    </div>
+                    <div class="menu-item-price">£5.95</div>
+                </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="menu-category">
+                <h3 class="menu-category-title brand-font">Desserts</h3>
+                <div class="menu-item">
+                    <div class="menu-item-details">
+                        <div class="menu-item-name">Daily Homemade Specials</div>
+                        <div class="menu-item-desc">Please ask a member of our staff for today's selection of authentic Italian desserts.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drinks -->
+            <div class="menu-category">
+                <h3 class="menu-category-title brand-font">Drinks</h3>
+                
+                <h4 class="sub-category-title">Soft Drinks</h4>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Coke / Coke Zero 330ml</div></div>
+                    <div class="menu-item-price">£2.95 / £2.75</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">San Pellegrino 330ml</div><div class="menu-item-desc">Ruby / Lemon / Orange</div></div>
+                    <div class="menu-item-price">£2.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Still / Sparkling water 500ml</div></div>
+                    <div class="menu-item-price">£2.50</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Orange Juice / Apple juice</div></div>
+                    <div class="menu-item-price">£3.25</div>
+                </div>
+
+                <h4 class="sub-category-title">Beer & Wine</h4>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Peroni 330ml</div></div>
+                    <div class="menu-item-price">£4.45</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Moretti 330ml</div></div>
+                    <div class="menu-item-price">£4.45</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">House Wine (Red / White)</div><div class="menu-item-desc">125ml / 175ml / 250ml</div></div>
+                    <div class="menu-item-price">£4.95 / £6.45 / £8.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">House Wine (Red / White)</div><div class="menu-item-desc">Bottle 750ml</div></div>
+                    <div class="menu-item-price">£22.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">House Prosecco</div><div class="menu-item-desc">Bottle 750ml</div></div>
+                    <div class="menu-item-price">£24.95</div>
+                </div>
+
+                <h4 class="sub-category-title">Hot Drinks</h4>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Espresso Single / Double</div></div>
+                    <div class="menu-item-price">£2.45 / £2.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Cappuccino</div></div>
+                    <div class="menu-item-price">£3.45</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Americano</div></div>
+                    <div class="menu-item-price">£2.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Latte</div></div>
+                    <div class="menu-item-price">£3.45</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Tea</div></div>
+                    <div class="menu-item-price">£2.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-details"><div class="menu-item-name">Hot Chocolate</div></div>
+                    <div class="menu-item-price">£3.95</div>
+                </div>
+                
+                <p style="margin-top: 2rem; font-size: 0.85rem; color: #888; text-align: center;">(v) Vegetarian | (s) Spicy. Please alert staff of any known allergies before ordering. 12.5% discretionary service charge will be added.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-dark">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 class="brand-font">Mio Casa</h4>
+                    <p>Unpretentious, laid-back eatery offering Italian staples from pizza to pasta plus beer & wine.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="brand-font">Location</h4>
+                    <p>58 Great Peter St</p>
+                    <p>London SW1P 2HD</p>
+                    <p>United Kingdom</p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="brand-font">Hours & Contact</h4>
+                    <p>Open daily until 9 pm</p>
+                    <p>+44 20 7222 0058</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mio Casa. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
